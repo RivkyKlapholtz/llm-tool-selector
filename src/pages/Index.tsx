@@ -17,19 +17,65 @@ const Index = () => {
   const [reasoning, setReasoning] = useState<any>(null);
 
   useEffect(() => {
-    const fetchReasoning = async () => {
+    const loadExistingData = async () => {
       try {
-        const response = await fetch('/getReasoning');
-        if (response.ok) {
-          const data = await response.json();
-          setReasoning(data);
+        // Check if there's existing data
+        const existingResponse = await fetch('/getExistingData');
+        if (existingResponse.ok) {
+          const existingData = await existingResponse.json();
+          setSelectedTools(existingData.tools || []);
+          setPrompt(existingData.prompt || "");
         }
+      } catch (error) {
+        console.log('No existing data');
+      }
+
+      try {
+        // Mock reasoning data - remove this when you have real backend
+        const mockReasoning = {
+          steps: [
+            {
+              step: 1,
+              action: "ניתוח השאלה",
+              details: "קראתי את השאלה והבנתי שהמשתמש מחפש מידע על...",
+              timestamp: "2024-01-15 10:30:00"
+            },
+            {
+              step: 2,
+              action: "בחירת כלים",
+              details: "בחרתי להשתמש ב-Web Search ו-Calculator כדי לענות על השאלה",
+              timestamp: "2024-01-15 10:30:05"
+            },
+            {
+              step: 3,
+              action: "חיפוש מידע",
+              details: "ביצעתי חיפוש ברשת ומצאתי 5 מקורות רלוונטיים",
+              timestamp: "2024-01-15 10:30:10"
+            },
+            {
+              step: 4,
+              action: "עיבוד תוצאות",
+              details: "עיבדתי את המידע ויצרתי תשובה מקיפה על בסיס המקורות שמצאתי",
+              timestamp: "2024-01-15 10:30:15"
+            }
+          ],
+          finalAnswer: "התשובה הסופית מבוססת על 4 צעדים של עיבוד מידע"
+        };
+        
+        // Replace with real API call when ready
+        // const response = await fetch('/getReasoning');
+        // if (response.ok) {
+        //   const data = await response.json();
+        //   setReasoning(data);
+        // }
+        
+        setReasoning(mockReasoning);
       } catch (error) {
         console.log('No reasoning available');
       }
     };
 
-    fetchReasoning();
+    loadExistingData();
   }, []);
 
   const handleSubmit = async () => {

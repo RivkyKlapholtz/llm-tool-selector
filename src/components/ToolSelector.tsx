@@ -51,7 +51,7 @@ export const ToolSelector = ({ selectedTools, onToolsChange }: ToolSelectorProps
       
       <Select onValueChange={handleSelectTool}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="בחר כלי..." />
+          <SelectValue placeholder="Tools" />
         </SelectTrigger>
         <SelectContent className="bg-popover z-50">
           {unselectedTools.map((tool) => (
