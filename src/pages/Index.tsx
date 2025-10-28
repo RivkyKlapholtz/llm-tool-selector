@@ -102,8 +102,16 @@ const Index = () => {
     setIsSubmitted(true);
   };
 
+  const handleClose = () => {
+    setIsSubmitted(true);
+  };
+
+  const handleBack = () => {
+    setIsSubmitted(false);
+  };
+
   if (isSubmitted) {
-    return <ResultView />;
+    return <ResultView onBack={handleBack} />;
   }
 
   return (
@@ -125,6 +133,7 @@ const Index = () => {
                 prompt={prompt}
                 onPromptChange={setPrompt}
                 onSubmit={handleSubmit}
+                onClose={handleClose}
               />
             </div>
             

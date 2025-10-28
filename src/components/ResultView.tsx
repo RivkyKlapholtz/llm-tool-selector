@@ -1,6 +1,13 @@
-export const ResultView = () => {
+interface ResultViewProps {
+  onBack: () => void;
+}
+
+export const ResultView = ({ onBack }: ResultViewProps) => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background">
+    <div 
+      className="flex items-center justify-center min-h-screen bg-background cursor-pointer"
+      onClick={onBack}
+    >
       <div className="text-center space-y-4">
         <div className="relative w-24 h-24 mx-auto">
           <div className="absolute inset-0 border-4 border-primary/20 rounded-lg animate-pulse" />
@@ -8,6 +15,7 @@ export const ResultView = () => {
           <div className="absolute inset-4 border-4 border-primary rounded-lg animate-pulse delay-150" />
         </div>
         <h1 className="text-3xl font-bold text-foreground">תצוגת קובייה</h1>
+        <p className="text-sm text-muted-foreground">לחץ כדי לחזור</p>
       </div>
     </div>
   );

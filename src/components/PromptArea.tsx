@@ -5,9 +5,10 @@ interface PromptAreaProps {
   prompt: string;
   onPromptChange: (prompt: string) => void;
   onSubmit: () => void;
+  onClose: () => void;
 }
 
-export const PromptArea = ({ prompt, onPromptChange, onSubmit }: PromptAreaProps) => {
+export const PromptArea = ({ prompt, onPromptChange, onSubmit, onClose }: PromptAreaProps) => {
   return (
     <div className="flex flex-col h-full space-y-4">
       <div className="space-y-2">
@@ -23,7 +24,7 @@ export const PromptArea = ({ prompt, onPromptChange, onSubmit }: PromptAreaProps
         dir="rtl"
       />
 
-      <div className="flex justify-start">
+      <div className="flex justify-start gap-3">
         <Button
           onClick={onSubmit}
           size="lg"
@@ -31,6 +32,14 @@ export const PromptArea = ({ prompt, onPromptChange, onSubmit }: PromptAreaProps
           disabled={!prompt.trim()}
         >
           יאללה, בוא נראה במה AI יותר טוב ממני....
+        </Button>
+        <Button
+          onClick={onClose}
+          size="lg"
+          variant="secondary"
+          className="px-8 py-6 text-base font-medium"
+        >
+          סגור
         </Button>
       </div>
     </div>
