@@ -45,7 +45,7 @@ export const ToolSelector = ({ selectedTools, onToolsChange }: ToolSelectorProps
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-foreground">
+      <h2 className="text-xl font-semibold text-foreground text-right">
         בחר את הtools שבהם הllm ישתמש לענות על השאלה שלך
       </h2>
       

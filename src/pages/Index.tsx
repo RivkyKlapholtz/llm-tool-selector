@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToolSelector } from "@/components/ToolSelector";
 import { PromptArea } from "@/components/PromptArea";
 import { ResultView } from "@/components/ResultView";
+import { ReasoningDisplay } from "@/components/ReasoningDisplay";
 import { toast } from "sonner";
 
 interface Tool {
@@ -13,6 +14,23 @@ const Index = () => {
   const [selectedTools, setSelectedTools] = useState<Tool[]>([]);
   const [prompt, setPrompt] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [reasoning, setReasoning] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchReasoning = async () => {
+      try {
+        const response = await fetch('/getReasoning');
+        if (response.ok) {
+          const data = await response.json();
+          setReasoning(data);
+        }
+      } catch (error) {
+        console.log('No reasoning available');
+      }
+    };
+
+    fetchReasoning();
+  }, []);
 
   const handleSubmit = async () => {
     if (!prompt.trim()) {
@@ -55,12 +73,16 @@ const Index = () => {
           </div>
 
           {/* Left Side - Prompt Area */}
-          <div className="bg-card rounded-2xl p-6 shadow-sm border border-border">
-            <PromptArea
-              prompt={prompt}
-              onPromptChange={setPrompt}
-              onSubmit={handleSubmit}
-            />
+          <div className="space-y-6">
+            <div className="bg-card rounded-2xl p-6 shadow-sm border border-border">
+              <PromptArea
+                prompt={prompt}
+                onPromptChange={setPrompt}
+                onSubmit={handleSubmit}
+              />
+            </div>
+            
+            {reasoning && <ReasoningDisplay reasoning={reasoning} />}
           </div>
         </div>
       </div>
