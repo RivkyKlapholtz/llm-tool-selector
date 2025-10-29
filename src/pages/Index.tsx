@@ -8,6 +8,7 @@ import { toast } from "sonner";
 interface Tool {
   id: string;
   name: string;
+  description?: string;
 }
 
 const Index = () => {
